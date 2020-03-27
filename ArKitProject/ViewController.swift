@@ -21,15 +21,16 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         sceneView.delegate = self
         
         // Show statistics such as fps and timing information
-        sceneView.showsStatistics = true
+        //sceneView.showsStatistics = true
         
         // Create a new scene
-        let scene = SCNScene(named: "art.scnassets/ship.scn")!
+        //let scene = SCNScene(named: "art.scnassets/ship.scn")!
         
         // Set the scene to the view
-        sceneView.scene = scene
+        //sceneView.scene = scene
         
         
+        /*
         //MARK: - Sahnedeki Objelerin dizi olarak alınıp hareket özelliği vs katılması
         for node in sceneView.scene.rootNode.childNodes {
             
@@ -39,8 +40,38 @@ class ViewController: UIViewController, ARSCNViewDelegate {
             let sequence = SCNAction.sequence([moveShip,fadeOut,fadeIn])
             let repeatForever = SCNAction.repeatForever(sequence)
             node.runAction(repeatForever)
+         
         }
+        */
+        /*
+        //MARK: - Ekranda obje oluşturma adımları
+        let myBox = SCNBox(width: 0.1, height: 0.1, length: 0.1, chamferRadius: 0.01)
+        let boxMaterial = SCNMaterial()
+        boxMaterial.diffuse.contents = UIImage(named: "art.scnassets/wood.jpg")
+        myBox.materials = [boxMaterial]
+        let node = SCNNode()
+        node.position = SCNVector3(0, 0.1, -0.5)
+        node.geometry = myBox
+        sceneView.scene.rootNode.addChildNode(node)
+        */
         
+        let mySphere = createSphere(radius: 0.1, content: "wall.png", vector: SCNVector3(0, 0.2, -1))
+        sceneView.scene.rootNode.addChildNode(mySphere)
+        sceneView.automaticallyUpdatesLighting = true
+        
+    }
+    
+    //MARK: - fonk ile obje oluşturma
+    func createSphere(radius: CGFloat, content: String, vector: SCNVector3) -> SCNNode {
+        
+        let mySphere = SCNSphere(radius: radius)
+        let boxMaterial = SCNMaterial()
+        boxMaterial.diffuse.contents = UIImage(named: "art.scnassets/\(content)")
+        mySphere.materials = [boxMaterial]
+        let node = SCNNode()
+        node.position = vector
+        node.geometry = mySphere
+        return node
     }
     
     override func viewWillAppear(_ animated: Bool) {
