@@ -55,8 +55,16 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         sceneView.scene.rootNode.addChildNode(node)
         */
         
-        let mySphere = createSphere(radius: 0.1, content: "wall.png", vector: SCNVector3(0, 0.2, -1))
-        sceneView.scene.rootNode.addChildNode(mySphere)
+        //let mySphere = createSphere(radius: 0.1, content: "wall.png", vector: SCNVector3(0, 0.2, -1))
+        
+        //MARK: - Güneş Sistemi Uygulaması
+        let world = createSphere(radius: 0.1, content: "world.png", vector: SCNVector3(0, 0.2, -1))
+        let mars = createSphere(radius: 0.2, content: "mars.jpg", vector: SCNVector3(0.5, 0.2, -1))
+        let venus = createSphere(radius: 0.15, content: "venus.jpeg", vector: SCNVector3(1,0.2,-1))
+        sceneView.scene.rootNode.addChildNode(world)
+        sceneView.scene.rootNode.addChildNode(mars)
+        sceneView.scene.rootNode.addChildNode(venus)
+        
         sceneView.automaticallyUpdatesLighting = true
         
     }
